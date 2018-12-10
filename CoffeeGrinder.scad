@@ -3,9 +3,9 @@ include <threads.scad>;
 thread_diameter = 47.5;
 thread_space = 1.5;
 
-bolt_hole_diameter = 6.0;
+bolt_hole_diameter = 7.0;
 bolt_thread_hole_diameter = 5.9;
-separate_parts=false;
+separate_parts=true;
 
 
 // part positions, separated or not
@@ -24,38 +24,40 @@ union() {
             // handle
             translate([0,0,-27.5]) cylinder(r1=30,r2=30,h=10,center=true,$fn=8);
             // thread
-            translate([0,0,-23]) metric_thread (diameter=thread_diameter, pitch=3, length=45);
+            translate([0,0,-23]) metric_thread (diameter=thread_diameter, pitch=3, length=50);
         }
+
         translate([0,0,-17.5]) cylinder(r1=17,r2=17,h=61,center=true);
+
         // grind mount hole
         difference() {
-            translate([0,0,22.5]) cylinder(r1=19,r2=19,h=20,center=true,$fn=96);
+            translate([0,0,22.5]) cylinder(r1=19,r2=19,h=20,center=true,$fn=24);
             translate([20.5,0,22.5]) cube([5,20,30],true);
             translate([-20.5,0,22.5]) cube([5,20,30],true);
         }
+
+        // wider bottom hole
+        union() {
+            translate([0,0,8.99]) cylinder(r1=21,r2=17,h=4,center=true);
+            translate([0,0,-18]) cylinder(r1=21,r2=21,h=50,center=true);
+        }
+
     }
 
     // bearing support
-    union() {
-        translate([0,0,-12.5]) difference()  {
-            cylinder(r1=14,r2=14,h=40,center=true);
-            cylinder(r1=12,r2=12,h=42,center=true);
-        }
+    difference() {
+
         // bearing slides
-        for(z=[0,45,90,135,180,225,270,315]) {
-            rotate([0,0,z]) translate([0,11.5,-12.5]) cube([2,1,40],true);
+        for(z=[0,60,120,180,240,300]) {
+            rotate([0,0,z]) translate([0,11.5,-12]) cube([3,20,40],true);
         }
-        
-        // bearing support joins
-        for(z=[0,90,180,270]) {
-            rotate([0,0,z]) translate([16,0,0]) difference() {
-                // join
-                translate([0,0,-12.5]) cube([7,7,40],true);
-                // bevels
-                rotate([33,0,0]) translate([0,1,7.8]) cube([7,7,3],true);
-                rotate([-33,0]) translate([0,-1,7.8]) cube([7,7,3],true);
-            }
-        }
+
+        // slide bottom bewels
+        translate([0,0,-35]) cylinder(r1=30,r2=11,h=30);
+
+        // 608 bearing hole
+        translate([0,0,-40]) cylinder(r1=11,r2=11,h=60);
+
     }
 }
 

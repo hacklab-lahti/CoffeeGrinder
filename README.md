@@ -1,7 +1,7 @@
 # CoffeeGrinder
 Mostly 3D printable opensource coffee bean grinder
 
-<img src="https://raw.githubusercontent.com/hacklab-lahti/CoffeeGrinder/master/v1_prototype.jpg" width="400"/>
+<img src="https://raw.githubusercontent.com/hacklab-lahti/CoffeeGrinder/master/v3_prototype.jpg" width="400"/>
 
 [See v1 prototype video on Facebook](https://www.facebook.com/hacklablahti/videos/266122960985825/)
 
